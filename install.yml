@@ -25,30 +25,31 @@
       - vsftpd
       - open-vm-tools
       
-  - name: VSFTPD setting    
+  - name: VSFTPD setting
   # /etc/vsftpd/vsftpd.confの設定変更
     command: cp -p /etc/vsftpd/vsftpd.conf{,.orig}
     replace: >-
       dest=/etc/vsftpd/vsftpd.conf
-      # anonymous ftpの無効
+    # anonymous ftpの無効
       regexp="anonymous_enable=YES"
       replace="anonymous_enable=NO"
-      # ログ設定
+    # ログ設定
       regexp="#xferlog_file=/var/log/xferlog"
       replace="xferlog_file=/var/log/vsftpd.log"
       regexp="xferlog_std_format=YES"
       replace="xferlog_std_format=NO"
-      # FTPログイン時のソフト名バージョン情報の非表示
+    # FTPログイン時のソフト名バージョン情報の非表示
       regexp="#ftpd_banner=Welcome to blah FTP service"
       replace="ftpd_banner=Welcome to blah FTP service"
-      # chroot設定
+    # chroot設定
       regexp="#chroot_local_user=YES"
       replace="chroot_local_user=YES"
       regexp="#chroot_list_enable=YES"
       replace="chroot_list_enable=YES"
       regexp="#chroot_list_file=/etc/vsftpd/chroot_list"
       replace="chroot_list_file=/etc/vsftpd/chroot_list"
-      
+
+  - name:設定行の追加
     lineinfile:
       dest=/etc/vsftpd/vsftpd.conf
       line={{ item }}
@@ -58,9 +59,9 @@
       - seccomp_sandbox=NO
       - allow_writeable_chroot=YES
 
-  - name:chroot_listとuser_listの作成
-    command: touch /etc/vsftpd/chroot_list
-    command: touch /etc/vsftpd/user_list
+  - name: chroot_listとuser_listの作成
+    command: echo -n > /etc/vsftpd/chroot_list
+    command: echo -n > /etc/vsftpd/user_list
        
   - name: restart vsftpd
   # vsftpdの再起動
