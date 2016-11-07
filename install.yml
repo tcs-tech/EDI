@@ -35,7 +35,7 @@
     command: cp /etc/vsftpd/vsftpd.conf /etc/vsftpd/vsftpd.conf.orig
 
   - name: chroot_listの作成
-    command: echo -n > /etc/vsftpd/chroot_list
+    command: cp /dev/null /etc/vsftpd/chroot_list
  
   - name: vsftpd setting
     # /etc/vsftpd/vsftpd.confの設定変更
