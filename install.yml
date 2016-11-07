@@ -1,0 +1,67 @@
+- hosts: localhost
+  connection: local
+  remote_user: root
+  sudo: yes
+
+  vars_prompt:
+  - name: yum_update
+    prompt: "Do you accept updates ?"
+    private: no
+    default: Y
+
+  tasks:
+  - name: Yum update packages
+    yum: name=* state=latest
+    when: yum_update == "Y" 
+
+  - name: Install ZABBIX reopsitory
+    yum: name={{ item }}
+    with_items:
+      - http://repo.zabbix.com/zabbix/3.2/rhel/7/x86_64/zabbix-release-3.2-1.el7.noarch.rpm
+    
+  - name: Install EX-DataConnect2 services
+    yum: name="{{ item }}" state=present
+    with_items:
+      - vsftpd
+      - open-vm-tools
+      
+  - name: VSFTPD setting    
+  # /etc/vsftpd/vsftpd.confの設定変更
+    command: cp -p /etc/vsftpd/vsftpd.conf{,.orig}
+    replace: >-
+      dest=/etc/vsftpd/vsftpd.conf
+      # anonymous ftpの無効
+      regexp="anonymous_enable=YES"
+      replace="anonymous_enable=NO"
+      # ログ設定
+      regexp="#xferlog_file=/var/log/xferlog"
+      replace="xferlog_file=/var/log/vsftpd.log"
+      regexp="xferlog_std_format=YES"
+      replace="xferlog_std_format=NO"
+      # FTPログイン時のソフト名バージョン情報の非表示
+      regexp="#ftpd_banner=Welcome to blah FTP service"
+      replace="ftpd_banner=Welcome to blah FTP service"
+      # chroot設定
+      regexp="#chroot_local_user=YES"
+      replace="chroot_local_user=YES"
+      regexp="#chroot_list_enable=YES"
+      replace="chroot_list_enable=YES"
+      regexp="#chroot_list_file=/etc/vsftpd/chroot_list"
+      replace="chroot_list_file=/etc/vsftpd/chroot_list"
+      
+    lineinfile:
+      dest=/etc/vsftpd/vsftpd.conf
+      line={{ item }}
+    with_items:
+      - userlist_deny=NO
+      - userlist_file=/etc/vsftpd/user_list
+      - seccomp_sandbox=NO
+      - allow_writeable_chroot=YES
+
+  - name:chroot_listとuser_listの作成
+    command: touch /etc/vsftpd/chroot_list
+    command: touch /etc/vsftpd/user_list
+       
+  - name: restart vsftpd
+  # vsftpdの再起動
+    service: name=vsftpd state=restarted enabled=yes
