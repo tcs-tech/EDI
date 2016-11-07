@@ -34,10 +34,9 @@
   - name: Backup vsftpd.conf
     command: cp /etc/vsftpd/vsftpd.conf /etc/vsftpd/vsftpd.conf.orig
 
-  - name: chroot_listとuser_listの作成
+  - name: chroot_listの作成
     command: echo -n > /etc/vsftpd/chroot_list
-    command: echo -n > /etc/vsftpd/user_list
-
+ 
   - name: vsftpd setting
     # /etc/vsftpd/vsftpd.confの設定変更
     lineinfile:
