@@ -26,30 +26,35 @@
       - open-vm-tools
 
   - name: Backup vsftpd.conf
-    command: cp /etc/vsftpd/vsftpd.conf /etc/vsftpd/vsftpd.conf.orig
-
-  - name: vsftpd setting
-    # /etc/vsftpd/vsftpd.confの設定変更
-    replace: >-
-      dest="/etc/vsftpd/vsftpd.conf"
-      regexp="^anonymous_enable=YES"
-      replace="anonymous_enable=NO"
-      regexp="^#xferlog_file=/var/log/xferlog"
-      replace="xferlog_file=/var/log/vsftpd.log"
-      regexp="^xferlog_std_format=YES"
-      replace="xferlog_std_format=NO"
-      regexp="^#ftpd_banner=Welcome to blah FTP service"
-      replace="ftpd_banner=Welcome to blah FTP service"
-      regexp="^#chroot_local_user=YES"
-      replace="chroot_local_user=YES"
-      regexp="^#chroot_list_enable=YES"
-      replace="chroot_list_enable=YES"
-      regexp="^#chroot_list_file=/etc/vsftpd/chroot_list"
-      replace="chroot_list_file=/etc/vsftpd/chroot_list"
+    command: cp -p /etc/vsftpd/vsftpd.conf{,.orig}
 
   - name: chroot_listとuser_listの作成
     command: echo -n > /etc/vsftpd/chroot_list
     command: echo -n > /etc/vsftpd/user_list
+
+  - name: vsftpd setting
+    # /etc/vsftpd/vsftpd.confの設定変更
+    lineinfile:
+      dest="/etc/vsftpd/vsftpd.conf"
+      state=present
+      backrefs=yes
+      regexp='{{ item.regexp }}'
+      line='{{ item.line }}'
+    with_items:
+      - regexp: "^anonymous_enable=YES"
+        line: "anonymous_enable=NO"
+      - regexp: "^#xferlog_file=/var/log/xferlog"
+        line: "xferlog_file=/var/log/vsftpd.log"
+      - regexp: "^xferlog_std_format=YES"
+        line: "xferlog_std_format=NO"
+      - regexp: "^#ftpd_banner=Welcome to blah FTP service"
+        line: "ftpd_banner=Welcome to blah FTP service"
+      - regexp: "^#chroot_local_user=YES"
+        line: "chroot_local_user=YES"
+      - regexp: "^#chroot_list_enable=YES"
+        line: "chroot_list_enable=YES"
+      - regexp: "^#chroot_list_file=/etc/vsftpd/chroot_list"
+        line: "chroot_list_file=/etc/vsftpd/chroot_list"
 
   - name: 設定行の追加
     lineinfile:
@@ -64,3 +69,4 @@
   - name: restart vsftpd
   # vsftpdの再起動
     service: name=vsftpd state=restarted enabled=yes
+    
