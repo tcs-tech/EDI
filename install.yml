@@ -34,7 +34,7 @@
   - name: Backup vsftpd.conf
     command: cp /etc/vsftpd/vsftpd.conf /etc/vsftpd/vsftpd.conf.orig
 
-  - name: chroot_listの作成
+  - name: Create chroot_list
     command: cp /dev/null /etc/vsftpd/chroot_list
  
   - name: vsftpd setting
@@ -60,10 +60,12 @@
         line: "chroot_list_enable=YES"
       - regexp: "^#chroot_list_file=/etc/vsftpd/chroot_list"
         line: "chroot_list_file=/etc/vsftpd/chroot_list"
-      - regexp: "^tcp_wrapper=YES"
-        line: "tcp_wrapper=NO"
-
-  - name: 設定行の追加
+      - regexp: "^listen=NO"
+        line: "listen=YES"
+      - regexp: "^listen_ipv6=YES"
+        line: "listen_ipv6=NO"
+      - regexp: "^tcp_wrappers=YES"
+        line: "tcp_wrappers=NO"
     lineinfile:
       dest="/etc/vsftpd/vsftpd.conf"
       line={{ item }}
@@ -76,4 +78,11 @@
   - name: restart vsftpd
   # vsftpdの再起動
     service: name=vsftpd state=restarted enabled=yes
-    
+
+- name: firewall setting
+      - firewalld: service=ftp permanent=true state=enabled
+      - service: name=firewalld state=restarted
+
+  - name: restart vsftpd
+  # vsftpdの再起動
+    service: name=vsftpd state=restarted enabled=yes
