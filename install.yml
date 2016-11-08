@@ -60,6 +60,8 @@
         line: "chroot_list_enable=YES"
       - regexp: "^#chroot_list_file=/etc/vsftpd/chroot_list"
         line: "chroot_list_file=/etc/vsftpd/chroot_list"
+      - regexp: "^tcp_wrapper=YES"
+        line: "tcp_wrapper=NO"
 
   - name: 設定行の追加
     lineinfile:
