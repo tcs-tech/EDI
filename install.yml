@@ -66,6 +66,8 @@
         line: "listen_ipv6=NO"
       - regexp: "^tcp_wrappers=YES"
         line: "tcp_wrappers=NO"
+  
+  - name: add line vsftpd.conf
     lineinfile:
       dest="/etc/vsftpd/vsftpd.conf"
       line={{ item }}
@@ -79,10 +81,9 @@
   # vsftpdの再起動
     service: name=vsftpd state=restarted enabled=yes
 
-- name: firewall setting
-      - firewalld: service=ftp permanent=true state=enabled
-      - service: name=firewalld state=restarted
-
+  # firewall setting
+  - firewalld: service=ftp permanent=true state=enabled immediate=true
+  
   - name: restart vsftpd
   # vsftpdの再起動
     service: name=vsftpd state=restarted enabled=yes
