@@ -76,6 +76,7 @@
       - userlist_file=/etc/vsftpd/user_list
       - seccomp_sandbox=NO
       - allow_writeable_chroot=YES
+      - use_localtime=YES
 
   - name: restart vsftpd
   # vsftpdの再起動
