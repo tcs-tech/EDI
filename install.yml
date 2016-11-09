@@ -34,16 +34,20 @@
       - wget
       - glib2-devel
       - gtk2-devel
-      
+      - pam-devel
+      - libcap-devel
+      - openssl-devel
+      - tcp_wrappers-devel
+
   - name: Create mockbuild user
     command: useradd -s /sbin/nologin mockbuild
-      
+
   - name: Install EDI services
     yum: name="{{ item }}" state=present
     with_items:
       - vsftpd
       - open-vm-tools
-
+      
   - name: Backup vsftpd.conf
     command: cp /etc/vsftpd/vsftpd.conf /etc/vsftpd/vsftpd.conf.orig
 
