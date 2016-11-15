@@ -1,4 +1,3 @@
-# EDI
 #Requirements
 Ansible 1.4 or higher and platform.
 
