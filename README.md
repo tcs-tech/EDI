@@ -10,4 +10,5 @@ RedHat7.x & CentOS7.x Minimal Install
  (2) yum makecache<br>
  (3) yum install -y ansible git<br>
  (4) git clone [GitHub URL]<br>
- (5) ansible-playbook -i host install.yml
+ (5) cd EDI/<br>
+ (6) ansible-playbook -i host install.yml
