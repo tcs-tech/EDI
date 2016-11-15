@@ -14,7 +14,7 @@ RedHat7.x & CentOS7.x Minimal Install
  (6) ansible-playbook -i host install.yml -vvv <br>
  
 #構文チェック <br>
-ansible-playbook test-playbook.yml --syntax-check <br>
+ansible-playbook install.yml --syntax-check <br>
 
 #dry-run <br>
-ansible-playbook test-playbook.yml -i hosts --check
+ansible-playbook -i host install.yml --check
