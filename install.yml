@@ -14,7 +14,7 @@
     yum: name=* state=latest
     when: yum_update == "Y"
 
-  - name: Desabled SELinux
+  - name: Disabled SELinux
     replace: >-
       dest="/etc/selinux/config"
       regexp="SELINUX=enforcing"
