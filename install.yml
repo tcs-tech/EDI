@@ -45,15 +45,15 @@
   - name: Create sftp log
     command: cp /dev/null /var/log/sftp
 
-  - name: add line rsyslog.conf
+  - name: rsyslog.conf setting
     lineinfile:
-      dest="/etc/rsyslog.conf"
+      dest=/etc/logrotate.d/syslog
+      insertafter="^local7.*"
       line={{ item }}
     with_items:
-      - " "
-      - "# add custom setting"
+      - ""
       - "# This rule to save the log output of sftp"
-      - local5.* /var/log/sftp
+      - "local5.* /var/log/sftp"
       
   - name: sshd setting
     # /etc/ssh/sshd_configの設定変更
@@ -66,6 +66,14 @@
     with_items:
       - regexp: "^Subsystem"
         line: "Subsystem       sftp    /usr/libexec/openssh/sftp-server -f LOCAL5 -l VERBOSE"
+        
+  - name: logrotate setting
+    lineinfile:
+      dest=/etc/logrotate.d/syslog
+      insertafter='^/var/log/spooler'
+      line={{ item }}
+    with_items:
+      - /var/log/sftp.log
       
   - name: Install EDI services
     yum: name="{{ item }}" state=present
