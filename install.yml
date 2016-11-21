@@ -131,10 +131,15 @@
   - name: restart vsftpd
   # vsftpdの再起動
     service: name=vsftpd state=restarted enabled=yes
+    
+  - name: restart sshd
+  # sshdの再起動
+    service: name=sshd state=restarted
+
+  - name: restart rsyslog
+  # rsyslogの再起動
+    service: name=rsyslog state=restarted
 
   # firewall setting
   - firewalld: service=ftp permanent=true state=enabled immediate=true
   
-  - name: restart vsftpd
-  # vsftpdの再起動
-    service: name=vsftpd state=restarted enabled=yes
