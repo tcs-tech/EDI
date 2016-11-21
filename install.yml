@@ -4,15 +4,15 @@
   sudo: yes
 
   vars_prompt:
-  - name: yum_update
-    prompt: "Do you accept updates ?"
-    private: no
-    default: Y
+#  - name: yum_update
+#    prompt: "Do you accept updates ?"
+#    private: no
+#    default: Y
 
   tasks:
-  - name: Yum update packages
-    yum: name=* state=latest
-    when: yum_update == "Y"
+#  - name: Yum update packages
+#   yum: name=* state=latest
+#    when: yum_update == "Y"
 
   - name: Disabled SELinux
     replace: >-
@@ -50,7 +50,7 @@
       dest="/etc/rsyslog.conf"
       line={{ item }}
     with_items:
-      - # This rule to save the log output of sftp
+      - "# This rule to save the log output of sftp"
       - local5.* /var/log/sftp
       
   - name: sshd setting
