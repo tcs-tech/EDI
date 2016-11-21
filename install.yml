@@ -73,7 +73,7 @@
       insertafter='^/var/log/spooler'
       line={{ item }}
     with_items:
-      - /var/log/sftp.log
+      - /var/log/sftp
       
   - name: Install EDI services
     yum: name="{{ item }}" state=present
