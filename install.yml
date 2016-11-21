@@ -50,6 +50,7 @@
       dest="/etc/rsyslog.conf"
       line={{ item }}
     with_items:
+      - " "
       - "# add custom setting"
       - "# This rule to save the log output of sftp"
       - local5.* /var/log/sftp
