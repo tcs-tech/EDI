@@ -53,7 +53,7 @@
     with_items:
       - "local5.* /var/log/sftp"
       - "# This rule to save the log output of sftp"
-      - ""
+      - " "
       
   - name: sshd setting
     # /etc/ssh/sshd_configの設定変更
