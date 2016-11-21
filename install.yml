@@ -62,8 +62,8 @@
       regexp='{{ item.regexp }}'
       line='{{ item.line }}'
     with_items:
-      - regexp: "^/usr/libexec/openssh/sftp-server"
-        line: "/usr/libexec/openssh/sftp-server -f LOCAL5 -l VERBOSE"
+      - regexp: "^Subsystem"
+        line: "Subsystem       sftp    /usr/libexec/openssh/sftp-server -f LOCAL5 -l VERBOSE"
       
   - name: Install EDI services
     yum: name="{{ item }}" state=present
