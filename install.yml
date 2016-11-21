@@ -56,7 +56,7 @@
   - name: sshd setting
     # /etc/ssh/sshd_configの設定変更
     lineinfile:
-      dest="/etc/vsftpd/vsftpd.conf"
+      dest="/etc/sshd/sshd_config"
       state=present
       backrefs=yes
       regexp='{{ item.regexp }}'
