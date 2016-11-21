@@ -11,8 +11,8 @@
 
   tasks:
   - name: Yum update packages
-   yum: name=* state=latest
-   when: yum_update == "Y"
+    yum: name=* state=latest
+    when: yum_update == "Y"
 
   - name: Disabled SELinux
     replace: >-
