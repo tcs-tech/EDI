@@ -38,6 +38,9 @@
       - libcap-devel
       - openssl-devel
       - tcp_wrappers-devel
+      - nkf
+      - perl-CGI
+      - perl-URI
 
   - name: Create mockbuild user
     command: useradd -s /sbin/nologin mockbuild
