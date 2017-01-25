@@ -41,8 +41,10 @@
       - nkf
       - perl-CGI
       - perl-URI
-      - cronie-noanacron
-      
+  
+  - name: install the cronie-noanacron package
+    yum: name=cronie-noanacron state=lasest
+    
   - name: remove the cronie-anacron package
     yum: name=cronie-anacron state=absent
   
