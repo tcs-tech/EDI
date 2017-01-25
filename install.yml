@@ -41,7 +41,11 @@
       - nkf
       - perl-CGI
       - perl-URI
-
+      - cronie-noanacron
+      
+  - name: remove the cronie-anacron package
+    yum: name=cronie-anacron state=absent
+  
   - name: Create mockbuild user
     command: useradd -s /sbin/nologin mockbuild
 
