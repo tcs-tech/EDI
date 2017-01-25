@@ -43,7 +43,7 @@
       - perl-URI
   
   - name: install the cronie-noanacron package
-    yum: name=cronie-noanacron state=lasest
+    yum: name=cronie-noanacron state=latest
     
   - name: remove the cronie-anacron package
     yum: name=cronie-anacron state=absent
