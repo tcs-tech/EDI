@@ -77,6 +77,7 @@
       line={{ item }}
     with_items:
       - /var/log/sftp
+      - /var/log/vsftpd.log
       
   - name: Install EDI services
     yum: name="{{ item }}" state=present
