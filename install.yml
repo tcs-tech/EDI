@@ -41,6 +41,8 @@
       - nkf
       - perl-CGI
       - perl-URI
+      - telnet
+      - wget
   
   - name: install the cronie-noanacron package
     yum: name=cronie-noanacron state=latest
