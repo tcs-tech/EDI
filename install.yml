@@ -174,18 +174,10 @@
   
   # logrotate設定
   - name: logrotation setting
-    command: mv /etc/logrotate.conf /etc/logrotate.conf.orig
+    command: cp /etc/logrotate.conf /etc/logrotate.conf.orig
     command: cp /root/ansible-edi-rhel7/logrotate.conf /etc/logrotate.conf
   
   - name: cron setting
     # /etc/cron.d/dailyjobsの設定変更
-    lineinfile:
-      dest="/etc/cron.d/dailyjobs"
-      state=present
-      backrefs=yes
-      regexp='{{ item.regexp }}'
-      line='{{ item.line }}'
-    with_items:
-      - regexp: "^02 4 * * * root [ ! -f /etc/cron.hourly/0anacron ] && run-parts /etc/cron.daily"
-        line: "00 0 * * * root [ ! -f /etc/cron.hourly/0anacron ] && run-parts /etc/cron.daily"
+    command: cp /root/ansible-edi-rhel7/dailyjobs /etc/cron.d/dailyjobs
         
