@@ -89,7 +89,11 @@
     with_items:
       - regexp: "^Subsystem"
         line: "Subsystem       sftp    /usr/libexec/openssh/sftp-server -f LOCAL5 -l VERBOSE"
-        
+      - regexp: "^GSSAPIAuthentication yes"
+        line: "GSSAPIAuthentication no"        
+      - regexp: "^#UseDNS yes"
+        line: "UseDNS no"        
+
   - name: logrotate setting
     lineinfile:
       dest=/etc/logrotate.d/syslog
