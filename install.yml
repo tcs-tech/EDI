@@ -178,6 +178,6 @@
   
   # logrotate設定
   - name: logrotation setting
-  command: mv /etc/logrotate.conf /etc/logrotate.conf.orig
-  command: cp /root/ansible-edi-rhel7/logrotate.conf /etc/logrotate.conf
+    command: mv /etc/logrotate.conf /etc/logrotate.conf.orig
+    command: cp /root/ansible-edi-rhel7/logrotate.conf /etc/logrotate.conf
   
