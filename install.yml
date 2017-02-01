@@ -170,10 +170,7 @@
 
   # firewall setting
   - firewalld: service=ftp permanent=true state=enabled immediate=true
-  - firewalld: port=10050-10051/tcp permanent=true state=enabled
-
-  # firewallの再起動（設定反映の為）
-    service: name=firewalld state=restarted
+  - firewalld: port=10050-10051/tcp permanent=true state=enabled immediate=true
   
   # logrotate設定
   - name: logrotation setting
