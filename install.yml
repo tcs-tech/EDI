@@ -175,4 +175,9 @@
 
   # firewallの再起動（設定反映の為）
     service: name=firewalld state=restarted
-    
+  
+  # logrotate設定
+  - name: logrotation setting
+  command: mv /etc/logrotate.conf /etc/logrotate.conf.orig
+  command: cp /root/ansible-edi-rhel7/logrotate.conf /etc/logrotate.conf
+  
