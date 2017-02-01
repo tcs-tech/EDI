@@ -172,9 +172,14 @@
   - firewalld: service=ftp permanent=true state=enabled immediate=true
   - firewalld: port=10050-10051/tcp permanent=true state=enabled immediate=true
   
+  - name: Backup vsftpd.conf
+    command: cp /etc/vsftpd/vsftpd.conf /etc/vsftpd/vsftpd.conf.orig
+    
   # logrotate設定
-  - name: logrotation setting
+  - name: Backup logrotate.conf
     command: cp /etc/logrotate.conf /etc/logrotate.conf.orig
+
+  - name: logrotate setting
     command: cp /root/ansible-edi-rhel7/logrotate.conf /etc/logrotate.conf
   
   - name: cron setting
