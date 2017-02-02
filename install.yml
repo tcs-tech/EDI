@@ -46,6 +46,7 @@
       - ftp
       - nmap
       - traceroute
+      - lsof
   
   - name: install the Zabbix Agent
     yum: name="{{ item }}" state=present
