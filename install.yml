@@ -150,7 +150,6 @@
       dest="/etc/vsftpd/vsftpd.conf"
       line={{ item }}
     with_items:
-      - pasv_enable=YES
       - userlist_deny=NO
       - userlist_file=/etc/vsftpd/user_list
       - seccomp_sandbox=NO
