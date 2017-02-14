@@ -4,6 +4,6 @@ PATH=/sbin:/bin:/usr/sbin:/usr/bin
 MAILTO=root
 
 # run-parts
-00 0 * * * root [ ! -f /etc/cron.hourly/0anacron ] && run-parts /etc/cron.daily
+59 23 * * * root [ ! -f /etc/cron.hourly/0anacron ] && run-parts /etc/cron.daily
 22 4 * * 0 root [ ! -f /etc/cron.hourly/0anacron ] && run-parts /etc/cron.weekly
 42 4 1 * * root [ ! -f /etc/cron.hourly/0anacron ] && run-parts /etc/cron.monthly
