@@ -155,6 +155,7 @@
       - seccomp_sandbox=NO
       - allow_writeable_chroot=YES
       - use_localtime=YES
+      - reverse_lookup_enable=NO
       
   - name: restart vsftpd
   # vsftpdの再起動
