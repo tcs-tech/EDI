@@ -157,8 +157,8 @@
       - use_localtime=YES
       - reverse_lookup_enable=NO
       - dual_log_enable=NO
-      - #log_ftp_protocol=YES
-      - #pasv_enable=YES
+      - "#log_ftp_protocol=YES"
+      - "#pasv_enable=YES"
       
   - name: restart vsftpd
   # vsftpdの再起動
