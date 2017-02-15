@@ -156,6 +156,8 @@
       - allow_writeable_chroot=YES
       - use_localtime=YES
       - reverse_lookup_enable=NO
+      - #log_ftp_protocol=YES
+      - #pasv_enable=YES
       
   - name: restart vsftpd
   # vsftpdの再起動
