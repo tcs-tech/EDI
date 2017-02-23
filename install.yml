@@ -157,7 +157,7 @@
       - use_localtime=YES
       - reverse_lookup_enable=NO
       - dual_log_enable=NO
-      - syslog_enable=NO
+      - syslog_enable=YES
       - "#log_ftp_protocol=YES"
       - "#pasv_enable=YES"
       
