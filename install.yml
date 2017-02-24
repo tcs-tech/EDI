@@ -176,6 +176,8 @@
   # firewall setting
   - firewalld: service=ftp permanent=true state=enabled immediate=true
   - firewalld: port=10050-10051/tcp permanent=true state=enabled immediate=true
+  - firewalld: port=514/tcp permanent=true state=enabled immediate=true
+  - firewalld: port=514/udp permanent=true state=enabled immediate=true
   
   - name: Backup vsftpd.conf
     command: cp /etc/vsftpd/vsftpd.conf /etc/vsftpd/vsftpd.conf.orig
