@@ -4,7 +4,7 @@ Ansible 1.4 or higher and platform.
 #System Requirements
 RedHat7.x & CentOS7.x Minimal Install
 
-#How to install
+#How to install<br>
  (1) yum install -y git epel-release<br>
  (2) yum makecache<br>
  (3) yum install -y ansible git<br>
